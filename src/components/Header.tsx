@@ -8,6 +8,10 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50">
@@ -15,6 +19,7 @@ const Header = () => {
           <Link
             to="/"
             className="block cursor-pointer py-1.5 text-base text-slate-800 font-semibold"
+            onClick={closeMenu} // Close menu when logo is clicked
           >
             Drone Explorer App
           </Link>
@@ -47,7 +52,10 @@ const Header = () => {
             }`}
           >
             <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-              <li className="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+              <li
+                className="flex items-center p-1 text-sm gap-x-2 text-slate-600"
+                onClick={closeMenu} // Close menu when any link is clicked
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -63,11 +71,18 @@ const Header = () => {
                   />
                 </svg>
 
-                <Link to="/config" className="flex items-center font-medium">
+                <Link
+                  to="/config"
+                  className="flex items-center font-medium"
+                  onClick={closeMenu} // Close menu when this link is clicked
+                >
                   Config
                 </Link>
               </li>
-              <li className="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+              <li
+                className="flex items-center p-1 text-sm gap-x-2 text-slate-600"
+                onClick={closeMenu} // Close menu when any link is clicked
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -83,11 +98,18 @@ const Header = () => {
                   />
                 </svg>
 
-                <Link to="/logs" className="flex items-center font-medium">
+                <Link
+                  to="/logs"
+                  className="flex items-center font-medium"
+                  onClick={closeMenu} // Close menu when this link is clicked
+                >
                   Logs
                 </Link>
               </li>
-              <li className="flex items-center p-1 text-sm gap-x-2 text-slate-600">
+              <li
+                className="flex items-center p-1 text-sm gap-x-2 text-slate-600"
+                onClick={closeMenu} // Close menu when any link is clicked
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -103,7 +125,11 @@ const Header = () => {
                   />
                 </svg>
 
-                <Link to="/temp-form" className="flex items-center font-medium">
+                <Link
+                  to="/temp-form"
+                  className="flex items-center font-medium"
+                  onClick={closeMenu} // Close menu when this link is clicked
+                >
                   Form
                 </Link>
               </li>
