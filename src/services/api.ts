@@ -14,7 +14,7 @@ export const postLog = async (logData: LogPayload): Promise<LogResponse> => {
   return response.data;
 };
 
-export const getLogs = async (droneId: number): Promise<Log[]> => {
-  const response = await axios.get<Log[]>(`${API_URL}/logs/${droneId}`);
+export const getLogs = async (): Promise<Log[]> => {
+  const response = await axios.get<Log[]>(`${API_URL}/logs/${DRONE_ID}`);
   return response.data;
 };

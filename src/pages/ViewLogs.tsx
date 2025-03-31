@@ -1,32 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Log } from '../types';
 import Container from '../components/Container';
-
+import {getLogs } from '../services/api';
 const ViewLogs: React.FC = () => {
   const [logs, setLogs] = useState<Log[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const logsPerPage = 25; // 25 logs per page
-  const droneId = Number(12124);
 
   // Mock data: 100 logs
-  const mockLogs: Log[] = Array.from({ length: 100 }, (_, index) => ({
-    created: new Date(Date.now() - index * 3600000).toISOString(), // 1 hour apart
-    country: ["Pakistan", "Thailand", "Japan", "USA", "Germany"][index % 5],
-    drone_id: droneId,
-    drone_name: `Drone ${Math.floor(Math.random() * 100)}`,
-    celsius: Math.floor(Math.random() * 20) + 30, // Random temp between 30-49°C
-  }));
+  // const mockLogs: Log[] = Array.from({ length: 100 }, (_, index) => ({
+  //   created: new Date(Date.now() - index * 3600000).toISOString(), // 1 hour apart
+  //   country: ["Pakistan", "Thailand", "Japan", "USA", "Germany"][index % 5],
+  //   drone_id: droneId,
+  //   drone_name: `Drone ${Math.floor(Math.random() * 100)}`,
+  //   celsius: Math.floor(Math.random() * 20) + 30, // Random temp between 30-49°C
+  // }));
 
   useEffect(() => {
     const fetchLogs = async () => {
       try {
         setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
-        const sortedLogs = mockLogs
-          .sort((a: Log, b: Log) => 
-            new Date(b.created).getTime() - new Date(a.created).getTime()
-          );
+        const response: Log[] = await getLogs(); // Await the API call
+        console.log("response",response)
+        const sortedLogs = response.sort((a: Log, b: Log) => 
+          new Date(b.created).getTime() - new Date(a.created).getTime()
+        );
         setLogs(sortedLogs);
       } catch (error) {
         console.error('Error fetching logs:', error);
@@ -35,7 +34,8 @@ const ViewLogs: React.FC = () => {
       }
     };
     fetchLogs();
-  }, [droneId]);
+  }, []);
+  
 
   // Calculate pagination
   const totalPages = Math.ceil(logs.length / logsPerPage);
